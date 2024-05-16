@@ -1,20 +1,31 @@
-import React, {FC} from 'react';
+import React, { ComponentProps } from 'react';
+import styles from '../BaseButton/BaseButton.module.scss';
+import cnBind from 'classnames/bind';
 
-export interface BaseButtonProps {
-    children: React.ReactNode;
-    color: string;
+export interface BaseButtonProps extends ComponentProps<'button'> {
+    /** Button variant */
+    variant?: 'text' | 'contained' | 'outlined';
+    /** Button size */
+    size?: 'small' | 'medium' | 'large';
 }
 
-const BaseButton: FC<BaseButtonProps> = ({
-                                                 children,
-                                                 color,
-                                                 ...props
-                                             }) => {
+const cx = cnBind.bind(styles);
+
+/** Custom Button Component */
+const BaseButton = ({ variant, size, ...props }): BaseButtonProps => {
+    const btn = cx('button', props.className, variant, size);
+
     return (
-        <button {...props} style={{color}}>
-            {children}
+        <button
+            type="button"
+            className={btn}
+            disabled={props.disabled}
+            onClick={props.onClick}
+            {...props}
+        >
+            {props.children}
         </button>
     );
-}
+};
 
 export default BaseButton;

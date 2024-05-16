@@ -1,0 +1,77 @@
+$primary-color: #5a76da;
+$active-bg-color: #97a7e2;
+$disabled-color: gray;
+$disabled-border-color: lightgrey;
+
+@mixin active-state {
+    background-color: $active-bg-color;
+    color: white;
+}
+
+@mixin disabled-state {
+    color: $disabled-color;
+    border-color: $disabled-border-color;
+    cursor: not-allowed;
+}
+
+.button {
+    cursor: pointer;
+    font-weight: 500;
+    border-radius: 7px;
+    padding: 10px;
+    border: 1px solid $primary-color;
+    background: none;
+    color: $primary-color;
+
+    &.small {
+        font-size: 0.75rem;
+    }
+    &.medium {
+        font-size: 1rem;
+    }
+    &.large {
+        font-size: 1.25rem;
+    }
+
+    &:active {
+        @include active-state;
+    }
+    &:disabled {
+        @include disabled-state;
+    }
+
+    &.text {
+        border: 0;
+        &:active {
+            @include active-state;
+        }
+        &:disabled {
+            @include disabled-state;
+            background: none;
+        }
+    }
+
+    &.outlined {
+        &:active {
+            @include active-state;
+        }
+        &:disabled {
+            @include disabled-state;
+        }
+    }
+
+    &.contained {
+        background-color: $primary-color;
+        color: white;
+        border: none;
+
+        &:active {
+            background-color: darken($primary-color, 10%);
+        }
+
+        &:disabled {
+            background-color: lightgrey;
+            color: $disabled-color;
+        }
+    }
+}

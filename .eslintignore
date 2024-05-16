@@ -1,6 +1,6 @@
-# .eslintignore
-node_modules/
-build/
+node_modules
+build
 webpack.config.js
-public/
+public
 dist
+storybook/*
