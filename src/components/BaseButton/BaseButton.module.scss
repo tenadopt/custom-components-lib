@@ -36,7 +36,7 @@ $disabled-border-color: lightgrey;
     &:active {
         @include active-state;
     }
-    &.disabled {
+    &:disabled {
         @include disabled-state;
     }
 
@@ -45,9 +45,9 @@ $disabled-border-color: lightgrey;
         &:active {
             @include active-state;
         }
-        &.disabled {
+        &:disabled {
             @include disabled-state;
-            background: none; // Specific to text variant
+            background: none;
         }
     }
 
@@ -55,7 +55,7 @@ $disabled-border-color: lightgrey;
         &:active {
             @include active-state;
         }
-        &.disabled {
+        &:disabled {
             @include disabled-state;
         }
     }
@@ -67,9 +67,9 @@ $disabled-border-color: lightgrey;
 
         &:active {
             background-color: darken($primary-color, 10%);
-        } // Darken for a dynamic effect
+        }
 
-        &.disabled {
+        &:disabled {
             background-color: lightgrey;
             color: $disabled-color;
         }
