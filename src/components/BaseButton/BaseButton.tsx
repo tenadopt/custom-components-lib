@@ -4,15 +4,15 @@ import cnBind from 'classnames/bind';
 
 export interface BaseButtonProps extends ComponentProps<'button'> {
     /** Button variant */
-    variant?: 'text' | 'contained' | 'outlined';
+    variant: 'text' | 'contained' | 'outlined';
     /** Button size */
-    size?: 'small' | 'medium' | 'large';
+    size: 'small' | 'medium' | 'large';
 }
 
 const cx = cnBind.bind(styles);
 
 /** Custom Button Component */
-const BaseButton = ({ variant, size, ...props }): BaseButtonProps => {
+const BaseButton = ({ variant, size, ...props }: Partial<BaseButtonProps>) => {
     const btn = cx('button', props.className, variant, size);
 
     return (
