@@ -1,0 +1,79 @@
+$input-width: 100%;
+$input-padding: 15px;
+$input-bg-color: white;
+$input-border-radius: 3px;
+$input-box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+$input-transition: all 0.5s ease-in;
+$input-hover-bg-color: aliceblue;
+$input-hover-color: black;
+
+$button-bg-color: transparent;
+$button-border-color: transparent;
+$button-color: gray;
+$button-margin: 0 2px;
+$button-transition: 0.3s;
+
+$arrow-rotate: 180deg;
+$arrow-transition: 0.3s;
+
+$options-padding: 5px 0;
+$options-bg-color: white;
+$options-border-radius: 3px;
+$options-transition: all 0.2s ease-in;
+$options-box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+
+.select {
+    width: $input-width;
+}
+
+.selectContainer {
+    width: $input-width;
+    position: relative;
+
+    .input {
+        width: $input-width;
+    }
+
+    .selectButton {
+        align-self: center;
+        position: absolute;
+        top: $input-padding;
+        right: 0;
+        transition: 200ms linear 50ms;
+        background-color: $button-bg-color;
+        border-color: $button-border-color;
+        cursor: pointer;
+        margin: $button-margin;
+        color: $button-color;
+        transition: $button-transition;
+
+        .arrowRotate {
+            transform: rotate($arrow-rotate);
+            transition: $arrow-transition;
+        }
+    }
+}
+
+.optionsContainer {
+    padding: $options-padding;
+    width: $input-width;
+    border-radius: $options-border-radius;
+    background-color: $options-bg-color;
+    transition: $options-transition;
+    box-shadow: $options-box-shadow;
+
+    &.none {
+        display: none;
+    }
+
+    .optionButton {
+        width: $input-width;
+        text-align: start;
+        color: black;
+
+        &:hover {
+            background-color: $input-hover-bg-color;
+            color: $input-hover-color;
+        }
+    }
+}
