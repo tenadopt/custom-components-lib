@@ -2,10 +2,10 @@ import React, { ChangeEvent, useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import BaseInput from '../BaseInput/BaseInput';
 import BaseButton from '../BaseButton/BaseButton';
-import ArrowIcon from '../Icon/ArrowIcon';
 import cnBind from 'classnames/bind';
 import styles from './BaseSelect.module.scss';
 import { useOutsideClick } from '../../utils/useOutsideClick';
+import IconButton from '../Icon/IconButton';
 
 export interface BaseSelectProps extends React.ComponentProps<'select'> {
     /**Select label*/
@@ -30,9 +30,7 @@ const BaseSelect = ({
     const [open, setOpen] = useState(false);
     const [selectedItem, setSelectedItem] = useState(defaultValue);
     const inputRef = useRef<HTMLInputElement>(null);
-    const divRef = useRef<HTMLDivElement>(null);
-
-    useOutsideClick(divRef, () => {
+    const divRef = useOutsideClick<HTMLDivElement>(() => {
         setOpen(false);
         setSelectedItem(defaultValue);
     });
@@ -73,7 +71,7 @@ const BaseSelect = ({
     };
 
     const handleOpen = () => {
-        setOpen(!open);
+        setOpen(prev => !prev);
     };
 
     const arrow = cx({
@@ -81,11 +79,11 @@ const BaseSelect = ({
     });
 
     const optionsContainer = cx('optionsContainer', {
-        none: !open,
+        hidden: !open,
     });
 
     return (
-        <div id="select" className={styles.select}>
+        <div id="select" className={styles.select} onClick={handleOpen}>
             <div className={styles.selectContainer}>
                 <BaseInput
                     role="combobox"
@@ -96,20 +94,13 @@ const BaseSelect = ({
                     label={label}
                     error={selectError}
                     className={styles.input}
-                    onClick={handleOpen}
                     readOnly
                 >
-                    <button
-                        onClick={handleOpen}
-                        className={styles.selectButton}
-                        style={{ backgroundColor: 'transparent', borderColor: 'transparent' }}
-                    >
-                        <ArrowIcon className={arrow} />
-                    </button>
+                    <IconButton arrow={arrow} />
                 </BaseInput>
             </div>
             {createPortal(
-                <div ref={divRef} className={optionsContainer}>
+                <div role="listbox" ref={divRef} className={optionsContainer}>
                     {open &&
                         Array.isArray(options) &&
                         options.map(option => {

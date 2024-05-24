@@ -18,7 +18,7 @@ const BaseInput = forwardRef<HTMLInputElement, Partial<BaseInputProps>>(
         const baseInputStyle = cx('input', className, variant, { error, disabled });
 
         return (
-            <div className={`${styles.containerInput}`}>
+            <div className={styles.containerInput}>
                 <input
                     id={id}
                     className={baseInputStyle}
@@ -27,9 +27,8 @@ const BaseInput = forwardRef<HTMLInputElement, Partial<BaseInputProps>>(
                     disabled={disabled}
                     ref={ref}
                     {...props}
-                    readOnly
                 />
-                <label className={styles.label} htmlFor={id}>
+                <label htmlFor={id} className={styles.label}>
                     {label}
                 </label>
                 {children}
