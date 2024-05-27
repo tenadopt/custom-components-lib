@@ -4,11 +4,7 @@ import { ReactComponent as Icon } from '../../assets/down-arrow.svg';
 
 const IconButton = ({ handleOpen, arrow }) => {
     return (
-        <button
-            onClick={handleOpen}
-            className={styles.selectButton}
-            style={{ backgroundColor: 'transparent', borderColor: 'transparent' }}
-        >
+        <button onClick={handleOpen} className={styles.selectButton}>
             <Icon className={`${styles.icon} ${arrow}`} />
         </button>
     );

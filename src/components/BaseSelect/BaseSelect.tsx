@@ -4,7 +4,6 @@ import BaseInput from '../BaseInput/BaseInput';
 import BaseButton from '../BaseButton/BaseButton';
 import cnBind from 'classnames/bind';
 import styles from './BaseSelect.module.scss';
-import { useOutsideClick } from '../../utils/useOutsideClick';
 import IconButton from '../Icon/IconButton';
 
 export interface BaseSelectProps extends React.ComponentProps<'select'> {
@@ -30,10 +29,7 @@ const BaseSelect = ({
     const [open, setOpen] = useState(false);
     const [selectedItem, setSelectedItem] = useState(defaultValue);
     const inputRef = useRef<HTMLInputElement>(null);
-    const divRef = useOutsideClick<HTMLDivElement>(() => {
-        setOpen(false);
-        setSelectedItem(defaultValue);
-    });
+    const divRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
         const inputElement = inputRef.current;
@@ -46,14 +42,7 @@ const BaseSelect = ({
             divElement.style.width = `${inputRect.width}px`;
             divElement.style.top = `${inputRect.bottom}px`;
             divElement.style.left = `${inputRect.left}px`;
-
-            const handleClick = () => setOpen(true);
-
-            divElement.addEventListener('click', handleClick);
-
-            return () => {
-                divElement.removeEventListener('click', handleClick);
-            };
+            divElement.style.zIndex = '999';
         }
     }, [inputRef]);
 
@@ -71,7 +60,12 @@ const BaseSelect = ({
     };
 
     const handleOpen = () => {
-        setOpen(prev => !prev);
+        setOpen(true);
+        inputRef.current.focus();
+    };
+
+    const handleClose = () => {
+        setOpen(false);
     };
 
     const arrow = cx({
@@ -83,8 +77,8 @@ const BaseSelect = ({
     });
 
     return (
-        <div id="select" className={styles.select} onClick={handleOpen}>
-            <div className={styles.selectContainer}>
+        <div id="select" className={styles.select}>
+            <div className={styles.selectContainer} onClick={handleOpen}>
                 <BaseInput
                     role="combobox"
                     value={selectedItem}
@@ -96,26 +90,29 @@ const BaseSelect = ({
                     className={styles.input}
                     readOnly
                 >
-                    <IconButton arrow={arrow} />
+                    <IconButton className={styles.input} arrow={arrow} />
                 </BaseInput>
             </div>
+            {open && <div className={styles.mask} onClick={handleClose} />}
             {createPortal(
-                <div role="listbox" ref={divRef} className={optionsContainer}>
-                    {open &&
-                        Array.isArray(options) &&
-                        options.map(option => {
-                            return (
-                                <BaseButton
-                                    key={option}
-                                    className={styles.optionButton}
-                                    variant="text"
-                                    onClick={() => handleOptionClick(option)}
-                                >
-                                    {option}
-                                </BaseButton>
-                            );
-                        })}
-                </div>,
+                <>
+                    <div role="listbox" ref={divRef} className={optionsContainer}>
+                        {open &&
+                            Array.isArray(options) &&
+                            options.map(option => {
+                                return (
+                                    <BaseButton
+                                        key={option}
+                                        className={styles.optionButton}
+                                        variant="text"
+                                        onClick={() => handleOptionClick(option)}
+                                    >
+                                        {option}
+                                    </BaseButton>
+                                );
+                            })}
+                    </div>
+                </>,
                 document.body,
             )}
         </div>

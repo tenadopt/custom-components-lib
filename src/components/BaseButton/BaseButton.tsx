@@ -13,10 +13,10 @@ const cx = cnBind.bind(styles);
 
 /** Custom Button Component */
 const BaseButton = ({ className, variant, size, children, ...props }: Partial<BaseButtonProps>) => {
-    const btn = cx('button', className, variant, size);
+    const btnClasses = cx('button', className, variant, size);
 
     return (
-        <button type="button" className={btn} {...props}>
+        <button type="button" className={btnClasses} {...props}>
             {children}
         </button>
     );
