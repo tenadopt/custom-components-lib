@@ -12,18 +12,12 @@ export interface BaseButtonProps extends ComponentProps<'button'> {
 const cx = cnBind.bind(styles);
 
 /** Custom Button Component */
-const BaseButton = ({ variant, size, ...props }: Partial<BaseButtonProps>) => {
-    const btn = cx('button', props.className, variant, size);
+const BaseButton = ({ className, variant, size, children, ...props }: Partial<BaseButtonProps>) => {
+    const btnClasses = cx('button', className, variant, size);
 
     return (
-        <button
-            type="button"
-            className={btn}
-            disabled={props.disabled}
-            onClick={props.onClick}
-            {...props}
-        >
-            {props.children}
+        <button type="button" className={btnClasses} {...props}>
+            {children}
         </button>
     );
 };

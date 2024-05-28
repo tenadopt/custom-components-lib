@@ -1,0 +1,116 @@
+$input-width: 100%;
+$input-padding: 15px;
+$input-bg-color: white;
+$input-border-radius: 3px;
+$input-transition: all 0.5s ease-in;
+$input-hover-bg-color: aliceblue;
+$input-hover-color: black;
+
+$button-bg-color: transparent;
+$button-border-color: transparent;
+$button-color: gray;
+$button-margin: 0 2px;
+$button-transition: 0.3s;
+
+$arrow-rotate: 180deg;
+$arrow-transition: 0.3s;
+
+$icon-width: 17px;
+$icon-height: 17px;
+
+$options-padding: 5px 0;
+$options-bg-color: white;
+$options-border-radius: 3px;
+$options-transition: all 0.2s ease-in;
+$options-box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+
+$primary-color: #5a76da;
+$error-color: red;
+
+@mixin transition($property, $duration) {
+    transition: $property $duration;
+}
+
+@mixin border-color($color) {
+    border-bottom-color: $color;
+}
+
+@mixin label-color($color) {
+    color: $color;
+}
+
+@mixin input-focus-hover {
+    @include border-color($primary-color);
+}
+
+@mixin input-error-focus-hover {
+    @include border-color($error-color);
+}
+
+.select {
+    width: $input-width;
+}
+
+.selectContainer {
+    width: $input-width;
+    position: relative;
+
+    .selectButton {
+        align-self: center;
+        position: absolute;
+        top: $input-padding;
+        right: 5px;
+        background-color: $button-bg-color;
+        border-color: $button-border-color;
+        cursor: pointer;
+        margin: $button-margin;
+        color: $button-color;
+        @include transition(all, 0.2s);
+    }
+
+    .arrowRotate {
+        rotate: $arrow-rotate;
+        @include transition(rotate, $arrow-transition);
+    }
+}
+
+.icon {
+    width: $icon-width;
+    height: $icon-height;
+    fill: currentColor;
+}
+
+.optionsContainer {
+    padding: $options-padding;
+    width: $input-width;
+    border-radius: $options-border-radius;
+    background-color: $options-bg-color;
+    @include transition(all, $options-transition);
+    box-shadow: $options-box-shadow;
+
+    &.hidden {
+        display: none;
+    }
+
+    .optionButton {
+        width: $input-width;
+        text-align: start;
+        color: black;
+        z-index: 2;
+
+        &:hover {
+            background-color: $input-hover-bg-color;
+            color: $input-hover-color;
+        }
+    }
+}
+
+.mask {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0);
+    z-index: 1;
+}
