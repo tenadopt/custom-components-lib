@@ -28,6 +28,7 @@ const BaseSelect = ({
 }: BaseSelectProps) => {
     const [open, setOpen] = useState(false);
     const [selectedItem, setSelectedItem] = useState(defaultValue);
+    const [highlightedIndex, setHighlightedIndex] = useState(-1);
     const inputRef = useRef<HTMLInputElement>(null);
     const divRef = useRef<HTMLDivElement>(null);
 
@@ -44,7 +45,7 @@ const BaseSelect = ({
             divElement.style.left = `${inputRect.left}px`;
             divElement.style.zIndex = '999';
         }
-    }, [inputRef]);
+    }, [inputRef, open]);
 
     const handleOptionClick = (option: string) => {
         setSelectedItem(option);
@@ -61,11 +62,45 @@ const BaseSelect = ({
 
     const handleOpen = () => {
         setOpen(true);
-        inputRef.current.focus();
+        inputRef.current?.focus();
     };
 
     const handleClose = () => {
         setOpen(false);
+    };
+
+    const handleKeyDown = (e: React.KeyboardEvent) => {
+        if (!open) {
+            if (e.key === 'Enter') {
+                setOpen(true);
+            }
+
+            return;
+        }
+
+        switch (e.key) {
+            case 'Escape':
+                setOpen(false);
+                break;
+            case 'ArrowDown':
+                e.preventDefault();
+                setHighlightedIndex(prevIndex =>
+                    prevIndex < options.length - 1 ? prevIndex + 1 : 0,
+                );
+                break;
+            case 'ArrowUp':
+                e.preventDefault();
+                setHighlightedIndex(prevIndex =>
+                    prevIndex > 0 ? prevIndex - 1 : options.length - 1,
+                );
+                break;
+            case 'Enter':
+                if (highlightedIndex >= 0 && highlightedIndex < options.length) {
+                    handleOptionClick(options[highlightedIndex]);
+                }
+
+                break;
+        }
     };
 
     const arrow = cx({
@@ -76,11 +111,27 @@ const BaseSelect = ({
         hidden: !open,
     });
 
+    useEffect(() => {
+        if (open) {
+            setHighlightedIndex(options.findIndex(option => option === selectedItem));
+        } else {
+            setHighlightedIndex(-1);
+        }
+    }, [open, options, selectedItem]);
+
     return (
         <div id="select" className={styles.select}>
-            <div className={styles.selectContainer} onClick={handleOpen}>
+            <div
+                className={styles.selectContainer}
+                onClick={handleOpen}
+                onKeyDown={handleKeyDown}
+                role="combobox"
+                aria-expanded={open}
+                aria-haspopup="listbox"
+                aria-controls="select-options"
+                tabIndex={0}
+            >
                 <BaseInput
-                    role="combobox"
                     value={selectedItem}
                     variant="outlined"
                     select={open}
@@ -96,14 +147,23 @@ const BaseSelect = ({
             {open && <div className={styles.mask} onClick={handleClose} />}
             {createPortal(
                 <>
-                    <div role="listbox" ref={divRef} className={optionsContainer}>
+                    <div
+                        role="listbox"
+                        ref={divRef}
+                        className={optionsContainer}
+                        id="select-options"
+                    >
                         {open &&
                             Array.isArray(options) &&
-                            options.map(option => {
+                            options.map((option, index) => {
+                                const optionCx = cx('optionButton', {
+                                    highlighted: index === highlightedIndex,
+                                });
+
                                 return (
                                     <BaseButton
                                         key={option}
-                                        className={styles.optionButton}
+                                        className={optionCx}
                                         variant="text"
                                         onClick={() => handleOptionClick(option)}
                                     >
