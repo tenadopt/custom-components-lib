@@ -3,9 +3,13 @@ import styles from './BaseCheckbox.module.scss';
 import cnBind from 'classnames/bind';
 
 export interface BaseCheckboxProps {
+    /** Checkbox label*/
     label: string;
+    /** Checkbox checked*/
     checked: boolean;
+    /** Checkbox onChange*/
     onChange: () => void;
+    /** Checkbox disabled*/
     disabled: boolean;
 }
 

@@ -1,0 +1,60 @@
+$primary-color: #1e90ff;
+$disabled-color: #d3d3d3;
+$checked-color: #4caf50;
+$unchecked-color: #ccc;
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 34px;
+    height: 20px;
+
+    &.disabled {
+        cursor: not-allowed;
+        .switch-slider {
+            background-color: $disabled-color;
+        }
+    }
+}
+
+.switch-input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.switch-slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: $unchecked-color;
+    transition: 0.4s;
+    border-radius: 34px;
+
+    &:before {
+        position: absolute;
+        content: '';
+        height: 16px;
+        width: 16px;
+        left: 2px;
+        bottom: 2px;
+        background-color: white;
+        transition: 0.4s;
+        border-radius: 50%;
+    }
+
+    &.checked {
+        background-color: $primary-color;
+        &:before {
+            transform: translateX(14px);
+        }
+    }
+
+    &.disabled {
+        background-color: $disabled-color;
+        cursor: not-allowed;
+    }
+}
