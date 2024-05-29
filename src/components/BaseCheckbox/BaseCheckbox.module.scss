@@ -1,0 +1,35 @@
+$primary-color: #000;
+$disabled-color: #bfbfbf;
+$input-size: 1rem;
+$margin-right: 8px;
+
+.base-checkbox {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+
+    .checkbox-input {
+        margin-right: $margin-right;
+        width: $input-size;
+        height: $input-size;
+        cursor: pointer;
+
+        &.disabled {
+            cursor: not-allowed;
+            color: $disabled-color;
+        }
+    }
+
+    .checkbox-label {
+        color: $primary-color;
+        font-weight: normal;
+
+        &.checked {
+            font-weight: bold;
+        }
+
+        &.disabled {
+            color: $disabled-color;
+        }
+    }
+}
