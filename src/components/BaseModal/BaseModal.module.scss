@@ -1,0 +1,76 @@
+$modal-bg-color: #fff;
+$modal-overlay-bg-color: rgba(0, 0, 0, 0.5);
+$modal-header-border-color: #ddd;
+$modal-button-bg-color: #007bff;
+$modal-button-hover-bg-color: #0056b3;
+$modal-box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: $modal-overlay-bg-color;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-container {
+    background-color: $modal-bg-color;
+    padding: 20px;
+    border-radius: 8px;
+    width: 400px;
+    max-width: 90%;
+    box-shadow: $modal-box-shadow;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid $modal-header-border-color;
+    padding-bottom: 10px;
+}
+
+.modal-close {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+.modal-content {
+    margin-top: 15px;
+}
+
+.modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 20px;
+}
+
+.modal-button {
+    background-color: $modal-button-bg-color;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+
+    &:hover {
+        background-color: $modal-button-hover-bg-color;
+    }
+}
+
+.mask {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0);
+    z-index: 1;
+}
