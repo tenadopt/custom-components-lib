@@ -9,7 +9,6 @@ const meta: Meta<BaseButtonProps> = {
         layout: 'centered',
     },
     argTypes: {
-        color: { control: 'color' },
         variant: {
             control: 'inline-radio',
             options: ['text', 'contained', 'outlined'],
@@ -27,24 +26,27 @@ const meta: Meta<BaseButtonProps> = {
     },
     args: {
         onClick: action('button-click'),
-        label: 'Base Button',
+        variant: 'outlined',
+        size: 'medium',
     },
 } as Meta<typeof BaseButton>;
 
 export default meta;
 
-type Story = StoryObj<typeof meta>;
+type Story = StoryObj<BaseButtonProps>;
 
 export const Default: Story = {
     args: {
         variant: 'outlined',
-        children: 'BaseButton',
+        size: 'medium',
+        children: 'Base Button',
     },
 };
 
 export const Text: Story = {
     args: {
         variant: 'text',
+        size: 'medium',
         children: 'Text Button',
     },
 };
@@ -52,6 +54,7 @@ export const Text: Story = {
 export const Contained: Story = {
     args: {
         variant: 'contained',
+        size: 'medium',
         children: 'Contained Button',
     },
 };
@@ -59,6 +62,7 @@ export const Contained: Story = {
 export const Outlined: Story = {
     args: {
         variant: 'outlined',
+        size: 'medium',
         children: 'Outlined Button',
     },
 };
@@ -66,6 +70,7 @@ export const Outlined: Story = {
 export const Small: Story = {
     args: {
         size: 'small',
+        variant: 'outlined',
         children: 'Small Button',
     },
 };
@@ -73,6 +78,7 @@ export const Small: Story = {
 export const Medium: Story = {
     args: {
         size: 'medium',
+        variant: 'outlined',
         children: 'Medium Button',
     },
 };
@@ -80,6 +86,7 @@ export const Medium: Story = {
 export const Large: Story = {
     args: {
         size: 'large',
+        variant: 'outlined',
         children: 'Large Button',
     },
 };
@@ -87,6 +94,8 @@ export const Large: Story = {
 export const Disabled: Story = {
     args: {
         disabled: true,
+        variant: 'outlined',
+        size: 'medium',
         children: 'Disabled Button',
     },
 };
