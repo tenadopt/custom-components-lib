@@ -1,6 +1,7 @@
 import React, { ComponentProps } from 'react';
-import styles from '../BaseButton/BaseButton.module.scss';
+// eslint-disable-next-line import/no-extraneous-dependencies
 import cnBind from 'classnames/bind';
+import styles from './BaseButton.module.scss';
 
 export interface BaseButtonProps extends ComponentProps<'button'> {
     /** Button variant */
@@ -12,7 +13,7 @@ export interface BaseButtonProps extends ComponentProps<'button'> {
 const cx = cnBind.bind(styles);
 
 /** Custom Button Component */
-const BaseButton = ({ className, variant, size, children, ...props }: BaseButtonProps) => {
+function BaseButton({ className, variant, size, children, ...props }: BaseButtonProps) {
     const btnClasses = cx('button', className, variant, size);
 
     return (
@@ -20,6 +21,6 @@ const BaseButton = ({ className, variant, size, children, ...props }: BaseButton
             {children}
         </button>
     );
-};
+}
 
 export default BaseButton;

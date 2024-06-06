@@ -2,13 +2,21 @@
     "env": {
         "browser": true,
         "es2021": true,
-        "node": true
+        "node": true,
+        "jest": true
+    },
+    "globals": {
+        "jest": true
     },
     "parser": "@typescript-eslint/parser",
     "extends": [
         "eslint:recommended",
         "plugin:prettier/recommended",
-        "plugin:storybook/recommended"
+        "plugin:storybook/recommended",
+        "plugin:@typescript-eslint/recommended",
+        "plugin:jest/recommended",
+        "airbnb",
+        "plugin:prettier/recommended"
     ],
     "parserOptions": {
         "ecmaVersion": "latest",
@@ -17,8 +25,32 @@
         },
         "sourceType": "module"
     },
+    "plugins": ["react", "@typescript-eslint", "jest", "prettier"],
     "rules": {
+        "react/react-in-jsx-scope": "off",
+        "@typescript-eslint/no-explicit-any": "off",
         "prettier/prettier": "warn",
+        "import/extensions": [
+            "error",
+            "ignorePackages",
+            {
+                "js": "never",
+                "jsx": "never",
+                "ts": "never",
+                "tsx": "never"
+            }
+        ],
+        "import/no-extraneous-dependencies": [
+            "error",
+            { "devDependencies": ["**/*.test.tsx", "**/*.stories.tsx"] }
+        ],
+        "react/jsx-filename-extension": [1, { "extensions": [".tsx"] }],
+        "react/jsx-props-no-spreading": "off",
+        "jsx-a11y/label-has-associated-control": "off",
+        "jsx-a11y/control-has-associated-label": "off",
+        "react/require-default-props": "off",
+        "react/button-has-type": "off",
+        "no-console": "warn",
         "padding-line-between-statements": [
             "error",
             {
@@ -47,5 +79,10 @@
                 "next": "*"
             }
         ]
+    },
+    "settings": {
+        "react": {
+            "version": "detect"
+        }
     }
 }

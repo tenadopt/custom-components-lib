@@ -1,6 +1,6 @@
 import { Meta, StoryObj } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
-import BaseInput, { BaseInputProps } from './BaseInput';
+import BaseInput, { BaseInputProps } from './BaseInput.tsx';
 
 const meta: Meta<BaseInputProps> = {
     title: 'Components/BaseInput',

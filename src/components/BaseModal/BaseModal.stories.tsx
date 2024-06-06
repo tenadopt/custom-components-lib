@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { Meta, StoryObj } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
-import BaseModal, { BaseModalProps } from './BaseModal';
+import BaseModal, { BaseModalProps } from './BaseModal.tsx';
 import './BaseModal.module.scss';
-import BaseButton from '../BaseButton/BaseButton';
+import BaseButton from '../BaseButton/BaseButton.tsx';
 
 const meta: Meta<BaseModalProps> = {
     title: 'Components/BaseModal',
@@ -49,7 +49,7 @@ const Template: Story = {
                 <BaseModal {...args} open={open} onClose={handleClose}>
                     {args.children}
                 </BaseModal>
-                <div id="modal-root"></div>
+                <div id="modal-root" />
             </div>
         );
     },

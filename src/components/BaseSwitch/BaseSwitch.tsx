@@ -1,25 +1,26 @@
 import React from 'react';
-import styles from './BaseSwitch.module.scss';
+// eslint-disable-next-line import/no-extraneous-dependencies
 import cnBind from 'classnames/bind';
+import styles from './BaseSwitch.module.scss';
 
 export interface BaseSwitchProps {
-    /** Switch checked*/
+    /** Switch checked */
     checked: boolean;
-    /** Switch onChange*/
+    /** Switch onChange */
     onChange: () => void;
-    /** Switch disabled*/
+    /** Switch disabled */
     disabled: boolean;
 }
 
 const cx = cnBind.bind(styles);
 
-const BaseSwitch = ({
+function BaseSwitch({
     className,
     checked,
     onChange,
     disabled,
     ...props
-}: Partial<BaseSwitchProps>) => {
+}: Partial<BaseSwitchProps>) {
     const switchClasses = cx('switch', className, { disabled });
     const inputClasses = cx('switch-input');
     const switchSliderClasses = cx('switch-slider', { checked, disabled });
@@ -34,9 +35,9 @@ const BaseSwitch = ({
                 disabled={disabled}
                 {...props}
             />
-            <span className={switchSliderClasses}></span>
+            <span className={switchSliderClasses} />
         </label>
     );
-};
+}
 
 export default BaseSwitch;

@@ -1,8 +1,9 @@
 import React from 'react';
 import { createPortal } from 'react-dom';
-import BaseButton from '../BaseButton/BaseButton';
-import styles from './BaseModal.module.scss';
+// eslint-disable-next-line import/no-extraneous-dependencies
 import cnBind from 'classnames/bind';
+import BaseButton from '../BaseButton/BaseButton.tsx';
+import styles from './BaseModal.module.scss';
 
 export interface BaseModalProps {
     open: boolean;
@@ -12,12 +13,13 @@ export interface BaseModalProps {
 
 const cx = cnBind.bind(styles);
 
-const BaseModal = ({ open, onClose, children }: Partial<BaseModalProps>) => {
+function BaseModal({ open, onClose, children }: Partial<BaseModalProps>) {
     if (!open) return null;
 
     const modalRoot = document.getElementById('modal-root');
 
     if (!modalRoot) {
+        // eslint-disable-next-line no-console
         console.error('Modal root element not found');
 
         return null;
@@ -42,6 +44,6 @@ const BaseModal = ({ open, onClose, children }: Partial<BaseModalProps>) => {
         </div>,
         modalRoot,
     );
-};
+}
 
 export default BaseModal;

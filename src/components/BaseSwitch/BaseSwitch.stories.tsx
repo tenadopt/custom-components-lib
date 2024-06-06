@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
-import BaseSwitch, { BaseSwitchProps } from './BaseSwitch';
+import BaseSwitch, { BaseSwitchProps } from './BaseSwitch.tsx';
 
 const meta: Meta<BaseSwitchProps> = {
     title: 'Components/BaseSwitch',

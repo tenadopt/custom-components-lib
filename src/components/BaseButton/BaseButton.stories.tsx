@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
-import BaseButton, { BaseButtonProps } from './BaseButton';
+import BaseButton, { BaseButtonProps } from './BaseButton.tsx';
 
 const meta: Meta<BaseButtonProps> = {
     title: 'Components/BaseButton',
