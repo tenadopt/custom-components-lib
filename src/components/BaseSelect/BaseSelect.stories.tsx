@@ -1,6 +1,6 @@
 import { Meta, StoryObj } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
-import BaseSelect, { BaseSelectProps } from './BaseSelect';
+import BaseSelect, { BaseSelectProps } from './BaseSelect.tsx';
 
 const meta: Meta<BaseSelectProps> = {
     title: 'Components/BaseSelect',

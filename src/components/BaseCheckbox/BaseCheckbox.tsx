@@ -1,28 +1,29 @@
 import React from 'react';
-import styles from './BaseCheckbox.module.scss';
+// eslint-disable-next-line import/no-extraneous-dependencies
 import cnBind from 'classnames/bind';
+import styles from './BaseCheckbox.module.scss';
 
 export interface BaseCheckboxProps {
-    /** Checkbox label*/
+    /** Checkbox label */
     label: string;
-    /** Checkbox checked*/
+    /** Checkbox checked */
     checked: boolean;
-    /** Checkbox onChange*/
+    /** Checkbox onChange */
     onChange: () => void;
-    /** Checkbox disabled*/
+    /** Checkbox disabled */
     disabled: boolean;
 }
 
 const cx = cnBind.bind(styles);
 
-const BaseCheckbox = ({
+function BaseCheckbox({
     className,
     label,
     checked,
     onChange,
     disabled,
     ...props
-}: Partial<BaseCheckboxProps>) => {
+}: Partial<BaseCheckboxProps>) {
     const checkboxClasses = cx('base-checkbox', {
         checked,
         disabled,
@@ -46,6 +47,6 @@ const BaseCheckbox = ({
             <span className={labelClasses}>{label}</span>
         </label>
     );
-};
+}
 
 export default BaseCheckbox;

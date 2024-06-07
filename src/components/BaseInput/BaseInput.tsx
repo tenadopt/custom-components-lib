@@ -1,13 +1,16 @@
 import React, { forwardRef } from 'react';
-import styles from './BaseInput.module.scss';
+// eslint-disable-next-line import/no-extraneous-dependencies
 import classNames from 'classnames/bind';
+import styles from './BaseInput.module.scss';
 
 export interface BaseInputProps extends React.ComponentProps<'input'> {
-    /**Input variant*/
-    variant: 'filled' | 'outlined' | 'standard';
-    /**Input label*/
+    /** Label variant */
     label: string;
-    /**Input error*/
+    /** Input variant */
+    variant: 'filled' | 'outlined' | 'standard';
+    /** Input label */
+    label: string;
+    /** Input error */
     error: boolean;
 }
 
@@ -15,7 +18,10 @@ const cx = classNames.bind(styles);
 
 const BaseInput = forwardRef<HTMLInputElement, Partial<BaseInputProps>>(
     ({ id, className, label, variant = 'standart', error, disabled, children, ...props }, ref) => {
-        const baseInputStyle = cx('input', className, variant, { error, disabled });
+        const baseInputStyle = cx('input', className, {
+            outlined: variant === 'outlined',
+            error,
+        });
 
         return (
             <div className={styles.containerInput}>
@@ -23,7 +29,6 @@ const BaseInput = forwardRef<HTMLInputElement, Partial<BaseInputProps>>(
                     id={id}
                     className={baseInputStyle}
                     placeholder=" "
-                    error={error}
                     disabled={disabled}
                     ref={ref}
                     {...props}

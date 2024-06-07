@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
-import BaseCheckbox, { BaseCheckboxProps } from './BaseCheckbox';
+import BaseCheckbox, { BaseCheckboxProps } from './BaseCheckbox.tsx';
 
 const meta: Meta<BaseCheckboxProps> = {
     title: 'Components/BaseCheckbox',
